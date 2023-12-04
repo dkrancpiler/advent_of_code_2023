@@ -9,6 +9,7 @@ fun main() {
                 if (c.isDigit()) {
                     number += c
                     if (numberStartIndex == -1) numberStartIndex = characterIndex
+                    if (string.length == characterIndex + 1) listOfSymbolsAndNumbers.add(Symbol(number, rowIndex, numberStartIndex))
                 }
                 else {
                     if (c != '.') {
