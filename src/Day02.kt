@@ -17,11 +17,9 @@ fun main() {
             if (isPossible) return@map it.substringBefore(":").filter { it.isDigit() }
             else ""
         }
-        var result = 0
-        newList.filter { it.isNotEmpty() }.forEach {
-            result += it.toInt()
+        return  newList.filter { it.isNotEmpty() }.sumOf {
+            it.toInt()
         }
-        return result
     }
 
     fun part2 (input: List<String>): Int {
