@@ -1,17 +1,52 @@
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.size
+        val numberList = input.map {line ->
+            line.first {char ->
+                char.isDigit()
+            }.toString() + line.last { char ->
+                char.isDigit() }
+        }
+        var result = 0
+        numberList.forEach {
+            result += it.toInt()
+        }
+        return result
+    }
+    fun part2Logic (line: String, isReversed: Boolean): String {
+        val lineUsed = if (isReversed) line.reversed() else line
+        val indexes = lineUsed.indices
+        var result = ""
+        for (index in indexes) {
+            if (lineUsed[index].isDigit())  {
+                result = lineUsed[index].toString()
+            }
+            numberEnum.values().onEach {enum ->
+                val enumName = if (isReversed) enum.name.lowercase().reversed() else enum.name.lowercase()
+                if (lineUsed.substring(index).startsWith(enumName)) {
+                    result = enum.value.toString()
+                    return@onEach
+                }
+            }
+            if (result.isNotEmpty()) break
+        }
+        return result
     }
 
     fun part2(input: List<String>): Int {
-        return input.size
+        var result = 0
+        input.forEach {line ->
+            var firstResult = part2Logic(line, false)
+            var secondResult = part2Logic(line, true)
+            result += (firstResult+secondResult).toInt()
+        }
+        return result
     }
 
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
+    val testInput = readInput("input")
+    part1(testInput).println()
+    part2(testInput).println()
 
-    val input = readInput("Day01")
-    part1(input).println()
-    part2(input).println()
+}
+enum class numberEnum(val value: Int) {
+    ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), EIGHT(8), NINE(9)
 }
