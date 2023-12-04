@@ -34,7 +34,7 @@ fun main() {
         val symbolList = elementList.filter { !it.isSymbolNumber() }
         numberList.forEach { number ->
             val filteredSymbolList = symbolList.filter {
-                it.startIndex in number.getIndexRangeForNumber() && it.row in number.getRowRangeForNumber()
+                it.startIndex in number.getIndexRange() && it.row in number.getRowRange()
             }
             if (filteredSymbolList.isNotEmpty()) result += number.value.toInt()
         }
@@ -48,14 +48,14 @@ fun main() {
         val symbolList = elementList.filter { !it.isSymbolNumber() }
         symbolList.forEach { symbol ->
             val filteredNumberList = numberList.filter {number ->
-                val numberIndexRange = number.getIndexRangeForNumber(1)
+                val numberIndexRange = number.getIndexRange(1)
                 var filterOutByIndex = true
                 numberIndexRange.forEach {
-                    if (it in symbol.getIndexRangeForNumber()) {
+                    if (it in symbol.getIndexRange()) {
                         filterOutByIndex = false
                     }
                 }
-                symbol.row in number.getRowRangeForNumber() && !filterOutByIndex
+                symbol.row in number.getRowRange() && !filterOutByIndex
             }
             if (filteredNumberList.size == 2) {
                 result += filteredNumberList[0].value.toInt() * filteredNumberList[1].value.toInt()
@@ -71,7 +71,7 @@ fun main() {
 }
 data class Symbol (val value: String, val row: Int, val startIndex: Int) {
 
-    fun getRowRangeForNumber(): IntRange = row - 1 .. row + 1
-    fun getIndexRangeForNumber(reduceRangeBy: Int = 0): IntRange = startIndex - 1 + reduceRangeBy ..startIndex + value.length - reduceRangeBy
+    fun getRowRange(): IntRange = row - 1 .. row + 1
+    fun getIndexRange(reduceRangeBy: Int = 0): IntRange = startIndex - 1 + reduceRangeBy ..startIndex + value.length - reduceRangeBy
     fun isSymbolNumber(): Boolean = value.firstOrNull { it.isDigit() } != null
 }
