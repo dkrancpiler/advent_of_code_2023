@@ -7,7 +7,6 @@ fun main() {
                 val singleCubeList = game.split(",")
                 singleCubeList.forEach {singleCubeDraw ->
                     Cubes.values().forEach {cube ->
-                        println(singleCubeDraw)
                         val digit = singleCubeDraw.filter { it.isDigit() }
                         if (singleCubeDraw.substringAfter("$digit ") == cube.name.lowercase() && digit.toInt() > cube.limit) isPossible = false
                     }
