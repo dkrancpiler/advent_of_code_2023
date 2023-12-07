@@ -8,6 +8,7 @@ fun main() {
             timeRange.forEach {
                 val distanceTraveled = it * (timeLong - it)
                 if (distanceTraveled > distances[index].toLong()) result += 1
+                else if (distanceTraveled < distances[index].toLong() && result > 0) return@forEach
             }
             if (result != 0) {
                 multipliedResult *= result
