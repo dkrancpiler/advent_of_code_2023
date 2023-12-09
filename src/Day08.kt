@@ -2,14 +2,14 @@ import java.math.BigInteger
 
 fun main() {
 
-    val currentKeyList = mutableListOf<String>()
+    val part2KeyList = mutableListOf<String>()
 
     fun parseInput(input: List<String>): MutableMap<String, Pair<String, String>> {
         val map:  MutableMap<String, Pair<String, String>> = mutableMapOf()
         input.forEach {
             val inputSplit = it.split("=")
             val key = inputSplit.first().trim()
-            if (key.last() == 'A') currentKeyList.add(key)
+            if (key.last() == 'A') part2KeyList.add(key)
             val pairInput = inputSplit.last().replace("(","").replace(")", "").trim()
             val splittedPair = pairInput.split(",")
             val pair = Pair(splittedPair.first(), splittedPair.last())
@@ -66,7 +66,7 @@ fun main() {
     }
 
     fun part2(combinationInput: String, mappingInput: MutableMap<String, Pair<String, String>>): BigInteger {
-        val resultList = currentKeyList.map { key ->
+        val resultList = part2KeyList.map { key ->
             var numberOfRuns: Int = 0
             var result = key
             var resultingNumberOfTries = 0L

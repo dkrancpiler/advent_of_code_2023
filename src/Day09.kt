@@ -32,7 +32,7 @@ fun main() {
             reversedEndValues.forEachIndexed  { index, number ->
                     if (index != 0) {
                         resultingList.add(number-resultingList.last())
-                    } else resultingList.add(0)
+                    } else resultingList.add(number)
                 }
             resultingList.last()
         }
