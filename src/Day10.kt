@@ -2,7 +2,7 @@ import kotlin.math.absoluteValue
 
 fun main() {
     val testInput = readInput("input_day_10")
-    val pathList = parseInputAndGetAllCharacters(testInput)
+    val pathList = parseInputAndGetAllFields(testInput)
     part1(pathList).println()
     part2(pathList).println()
     part2SurfaceSolution(pathList).println()
@@ -19,7 +19,6 @@ fun part2SurfaceSolution(input: List<PipeField>): Int {
     val mappedLineSequence = lineIndexSequence.mapIndexed { index, i ->
         val nextIndex = if (index < lineIndexSequence.count() - 1) index + 1 else 0
         i * columnIndexSequence.elementAt(nextIndex)
-
     }
     val mappedColumnSequence = columnIndexSequence.mapIndexed { index, i ->
         val nextIndex = if (index < columnIndexSequence.count() - 1) index + 1 else 0
@@ -29,7 +28,7 @@ fun part2SurfaceSolution(input: List<PipeField>): Int {
     return surfaceAreaResult.absoluteValue - input.size / 2
 }
 
-fun parseInputAndGetAllCharacters(input: List<String>): List<PipeField> {
+fun parseInputAndGetAllFields(input: List<String>): List<PipeField> {
     val lineWithAnimal = input.first { it.contains("S") }
     val lineIndexThatHasAnimal = input.indexOf(lineWithAnimal)
     val rowIndexOfAnimal = lineWithAnimal.indexOf(lineWithAnimal.first { it == 'S' })
@@ -108,12 +107,12 @@ fun parseInputAndGetAllCharacters(input: List<String>): List<PipeField> {
 }
 
 fun part2(input: List<PipeField>): Int {
-    val test = input.fold(0 to 0) { (sum, d), field ->
+    val test = input.fold(0 to 0) { (sum, increaseValue), field ->
         when (field.direction!!) {
-            Direction.NORTH -> sum to d + 1
-            Direction.SOUTH -> sum to d - 1
-            Direction.WEST -> sum - d to d
-            Direction.EAST -> sum + d to d
+            Direction.NORTH -> sum to increaseValue + 1
+            Direction.SOUTH -> sum to increaseValue - 1
+            Direction.WEST -> sum - increaseValue to increaseValue
+            Direction.EAST -> sum + increaseValue to increaseValue
         }
     }
     return test.first.absoluteValue - (input.size / 2)
