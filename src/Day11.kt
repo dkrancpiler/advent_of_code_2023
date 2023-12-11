@@ -52,12 +52,12 @@ fun main() {
                         )
                     ) increaseColumnMultiplier++
                 }
-                val finalResult =
+                val duplicationResult =
                     if (isPart2) (increaseColumnMultiplier * multiplier - increaseColumnMultiplier).toBigInteger() + (increaseLineMultiplier * multiplier - increaseLineMultiplier).toBigInteger()
                     else (increaseColumnMultiplier + increaseLineMultiplier).toBigInteger()
                 val distance =
                     ((comparisonGalaxy.columnIndex - initialGalaxy.columnIndex).absoluteValue
-                            + (comparisonGalaxy.lineIndex - initialGalaxy.lineIndex).absoluteValue).toBigInteger() + finalResult
+                            + (comparisonGalaxy.lineIndex - initialGalaxy.lineIndex).absoluteValue).toBigInteger() + duplicationResult
                 distance
             }
             result.sumOf { it }
